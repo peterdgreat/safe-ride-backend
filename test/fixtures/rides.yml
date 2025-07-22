@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  driver: one
+  ride_request: one
+  start_time: 2025-07-22 11:49:35
+  end_time: 2025-07-22 11:49:35
+  status: MyString
+
+two:
+  driver: two
+  ride_request: two
+  start_time: 2025-07-22 11:49:35
+  end_time: 2025-07-22 11:49:35
+  status: MyString

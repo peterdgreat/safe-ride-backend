@@ -1,0 +1,2 @@
+en:
+  emergency_alert: "Emergency! %{user_first_name} just left %{destination} on a ride. Please check on them."
