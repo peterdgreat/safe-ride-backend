@@ -8,7 +8,7 @@ module Mutations
     def resolve(input:)
       driver = Driver.new(input.to_h)
       driver.user = context[:current_user]
-
+    
       if driver.save
         { driver: driver, errors: [] }
       else

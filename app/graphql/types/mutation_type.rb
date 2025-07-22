@@ -12,5 +12,6 @@ module Types
     field :send_emergency_alert, mutation: Mutations::SendEmergencyAlert
     field :create_driver_profile, mutation: Mutations::CreateDriverProfile
     field :create_ride, mutation: Mutations::CreateRide
+    field :create_profile, mutation: Mutations::CreateProfile
   end
 end

@@ -14,4 +14,10 @@ class RidePolicy < ApplicationPolicy
   def send_emergency_alert?
     true # For now, allow any user to send an emergency alert for testing purposes
   end
+
+  class Scope < Scope
+    def resolve
+      scope.all # For now, allow any user to see all rides for testing purposes
+    end
+  end
 end
