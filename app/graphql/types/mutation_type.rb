@@ -2,6 +2,7 @@
 
 module Types
   class MutationType < Types::BaseObject
+    field :counter_ride_request, mutation: Mutations::CounterRideRequest
     field :create_user, mutation: Mutations::CreateUser
     field :login, mutation: Mutations::Login
     field :create_emergency_contact, mutation: Mutations::CreateEmergencyContact
@@ -13,5 +14,6 @@ module Types
     field :create_driver_profile, mutation: Mutations::CreateDriverProfile
     field :create_ride, mutation: Mutations::CreateRide
     field :create_profile, mutation: Mutations::CreateProfile
+    field :create_ride_request, mutation: Mutations::CreateRideRequest
   end
 end

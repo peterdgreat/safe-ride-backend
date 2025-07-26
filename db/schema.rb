@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_22_120809) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_24_202917) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -62,6 +62,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_120809) do
     t.uuid "passenger_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.geography "dropoff_location", limit: {:srid=>4326, :type=>"geometry", :geographic=>true}, null: false
+    t.float "fare_amount"
+    t.index ["dropoff_location"], name: "index_ride_passengers_on_dropoff_location", using: :gist
     t.index ["passenger_id"], name: "index_ride_passengers_on_passenger_id"
     t.index ["ride_id"], name: "index_ride_passengers_on_ride_id"
   end
@@ -75,19 +78,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_22_120809) do
     t.boolean "require_verified_passengers"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.geography "pickup_location", limit: {:srid=>4326, :type=>"geometry", :geographic=>true}, null: false
+    t.float "estimated_fare"
     t.index ["passenger_id"], name: "index_ride_requests_on_passenger_id"
+    t.index ["pickup_location"], name: "index_ride_requests_on_pickup_location", using: :gist
   end
 
-# Could not dump table "rides" because of following StandardError
-#   Unknown type 'geometry' for column 'location'
-
-
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
-    t.string "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string "srtext", limit: 2048
-    t.string "proj4text", limit: 2048
-    t.check_constraint "srid > 0 AND srid <= 998999", name: "spatial_ref_sys_srid_check"
+  create_table "rides", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "driver_id", null: false
+    t.uuid "ride_request_id", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.geography "location", limit: {:srid=>4326, :type=>"geometry", :geographic=>true}
+    t.index ["driver_id"], name: "index_rides_on_driver_id"
+    t.index ["location"], name: "index_rides_on_location", using: :gist
+    t.index ["ride_request_id"], name: "index_rides_on_ride_request_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

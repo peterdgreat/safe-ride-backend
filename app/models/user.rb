@@ -8,6 +8,11 @@ class User < ApplicationRecord
   has_many :emergency_contacts, dependent: :destroy
   has_one :driver, dependent: :destroy
 
+  validates_presence_of :email, :phone_number, :first_name, :last_name
+  validates_uniqueness_of :email, case_sensitive: false
+  validates_uniqueness_of :phone_number
+  validates_length_of :password, minimum: 6, if: -> { new_record? || changes[:password] }
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)

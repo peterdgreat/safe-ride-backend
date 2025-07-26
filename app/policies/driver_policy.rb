@@ -1,5 +1,6 @@
 class DriverPolicy < ApplicationPolicy
   def show?
-    true # For now, allow any user to view a driver for testing purposes
+    Rails.logger.debug "DriverPolicy#show?: user = #{user.inspect}, record = #{record.inspect}"
+    user.present? # Allow viewing only if a user is present
   end
 end

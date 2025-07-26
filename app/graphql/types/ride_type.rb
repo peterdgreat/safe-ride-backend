@@ -6,6 +6,7 @@ module Types
     field :start_time, GraphQL::Types::ISO8601DateTime, null: true
     field :end_time, GraphQL::Types::ISO8601DateTime, null: true
     field :status, String, null: false
-    field :location, String, null: true # PostGIS point will be serialized as String
+    field :location, Types::GeometryType, null: true
+    field :ride_passengers, [Types::RidePassengerType], null: false
   end
 end

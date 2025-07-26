@@ -1,0 +1,104 @@
+<mxfile host="app.diagrams.net" modified="2023-10-27T10:00:00.000Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="YOUR_ETAG_HERE" version="22.0.8" type="device">
+  <diagram id="SafeRideNG_Backend_Architecture" name="Page-1">
+    <mxGraphModel dx="1434" dy="806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageEnabled="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Rails API -->
+        <mxCell id="2" value="Rails API Backend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="300" y="150" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="GraphQL Endpoint (/graphql)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="2" vertex="1">
+          <mxGeometry x="20" y="20" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="ActionCable (WebSocket)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="2" vertex="1">
+          <mxGeometry x="20" y="55" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="Sidekiq" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="350" y="300" width="100" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Database -->
+        <mxCell id="6" value="PostgreSQL Database" style="shape=cylinder;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="600" y="150" width="80" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="PostGIS Extension" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="6" vertex="1">
+          <mxGeometry x="0" y="70" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="Tables: users, drivers, rides, etc." style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="6" vertex="1">
+          <mxGeometry x="0" y="0" width="80" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- External Services -->
+        <mxCell id="9" value="Africa's Talking" style="shape=cloud;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="600" y="300" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="WhatsApp / SMS" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="9" vertex="1">
+          <mxGeometry x="0" y="50" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="11" value="Google Maps API (Optional)" style="shape=cloud;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="600" y="450" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="12" value="Estimated Duration" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="11" vertex="1">
+          <mxGeometry x="0" y="50" width="120" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Frontend -->
+        <mxCell id="13" value="Frontend (Web/Mobile App)" style="shape=card;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#999999;" parent="1" vertex="1">
+          <mxGeometry x="50" y="150" width="150" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Data Flows -->
+        <mxCell id="14" value="GraphQL Requests" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="13" target="3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="185" as="sourcePoint" />
+            <mxPoint x="300" y="185" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="15" value="WebSocket Updates" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="13" target="4" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="210" as="sourcePoint" />
+            <mxPoint x="300" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="16" value="DB Operations" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="2" target="6" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="190" as="sourcePoint" />
+            <mxPoint x="600" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="17" value="Background Jobs" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="2" target="5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="230" as="sourcePoint" />
+            <mxPoint x="400" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="18" value="API Calls" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="5" target="9" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="450" y="325" as="sourcePoint" />
+            <mxPoint x="600" y="325" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="19" value="API Calls" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="2" target="11" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="480" as="sourcePoint" />
+            <mxPoint x="600" y="480" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="550" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="20" value="USSD Requests" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="9" target="2" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="660" y="380" as="sourcePoint" />
+            <mxPoint x="400" y="230" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="660" y="260" />
+              <mxPoint x="400" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

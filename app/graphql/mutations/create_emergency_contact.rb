@@ -6,9 +6,10 @@ module Mutations
     field :errors, [String], null: false
 
     def resolve(input:)
+      authorize! :create, EmergencyContact # Authorize before creating the object
+
       emergency_contact = EmergencyContact.new(input.to_h)
       emergency_contact.user = context[:current_user]
-      authorize! :create, emergency_contact
 
       if emergency_contact.save
         { emergency_contact: emergency_contact, errors: [] }

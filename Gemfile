@@ -56,8 +56,8 @@ gem "sidekiq"
 gem "africastalking-ruby"
 
 gem "rgeo"
-gem "rgeo-activerecord"
-
+gem "activerecord-postgis-adapter"
+gem 'rgeo-activerecord'
 group :development, :test do
   gem "graphiql-rails"
   gem "faker"
@@ -69,4 +69,8 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'database_cleaner'
+  gem "shoulda-matchers", "~> 5.0"
 end

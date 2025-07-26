@@ -1,10 +1,11 @@
 class EmergencyContactPolicy < ApplicationPolicy
-  def show?
-    user == record.user
-  end
-
   def create?
-    user == record.user
+    Rails.logger.debug "Pundit: current_user = #{user.inspect}"
+    Rails.logger.debug "Pundit: record = #{record.inspect}"
+    Rails.logger.debug "Pundit: record.class = #{record.class}"
+    # For create? policy, record is typically the class itself.
+    # We just need to check if a user is present to create an emergency contact.
+    user.present?
   end
 
   def update?
@@ -13,11 +14,5 @@ class EmergencyContactPolicy < ApplicationPolicy
 
   def destroy?
     user == record.user
-  end
-
-  class Scope < Scope
-    def resolve
-      scope.where(user: user)
-    end
   end
 end

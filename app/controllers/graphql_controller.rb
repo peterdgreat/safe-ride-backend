@@ -17,6 +17,10 @@ class GraphqlController < ApplicationController
     }
     result = RideHailingSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
+  rescue Pundit::NotAuthorizedError => e
+    render json: { errors: [{ message: e.message }] }, status: :unauthorized
+  rescue => e
+    raise e
   end
 
   private
